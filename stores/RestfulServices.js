@@ -1,10 +1,9 @@
 import FetchBase from './FetchBase';
-import configs from 'appConfigs';
 
 class RestfulServices extends FetchBase {
   constructor() {
     super();
-    this.endpoint = configs.baseUrl;
+    this.endpoint = '';
   }
 
   getTodos() {

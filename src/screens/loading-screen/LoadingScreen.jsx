@@ -1,17 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, View, Button } from 'react-native';
-import { screenNames } from 'src/constants/Navigation';
+import { Animated, ImageBackground } from 'react-native';
+import SafeAreaViewWithStatusBar from 'src/hocs/safeareview-with-statusbar';
 import styles from './LoadingScreen.styles';
 
 const logo = require('assets/images/logo-main.png');
+const backgroundImage = require('assets/images/water-art.jpg');
 
-const LoadingScreen = ({ navigation }) => {
+const LoadingScreen = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-
   useEffect(() => {
     startAnimation();
   }, [fadeAnim]);
-
   const animation = Animated.sequence([
     Animated.timing(fadeAnim, {
       toValue: 1,
@@ -28,23 +27,26 @@ const LoadingScreen = ({ navigation }) => {
   const startAnimation = () => {
     Animated.loop(animation).start();
   };
-
+  const statusBarProps = {
+    hidden: true,
+  };
   return (
-    <View style={styles.container}>
-      <Animated.Image
-        style={{
-          opacity: fadeAnim,
-          resizeMode: 'contain',
-          width: 250,
-          height: 250,
-        }}
-        source={logo}
-      />
-      <Button
-        onPress={() => navigation.navigate(screenNames.home)}
-        title="Home Page"
-      />
-    </View>
+    <SafeAreaViewWithStatusBar
+      viewStyle={styles.container}
+      statusBarProps={statusBarProps}
+    >
+      <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+        <Animated.Image
+          style={{
+            opacity: fadeAnim,
+            resizeMode: 'contain',
+            width: 250,
+            height: 250,
+          }}
+          source={logo}
+        />
+      </ImageBackground>
+    </SafeAreaViewWithStatusBar>
   );
 };
 

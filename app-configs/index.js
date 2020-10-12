@@ -1,2 +1,1 @@
-import AppConfig from './AppConfig.json';
-export default AppConfig;
+export { default } from './AppConfig.json';

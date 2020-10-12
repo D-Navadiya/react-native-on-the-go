@@ -10,5 +10,3 @@ export const themeMerger = (
   navigationThemeObj,
   customThemeObj,
 ) => merge(paperThemeObj, navigationThemeObj, customThemeObj);
-
-export default { styleCreator, themeMerger };
